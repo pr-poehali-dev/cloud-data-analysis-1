@@ -7,6 +7,7 @@ interface PackageOption {
   name: string;
   price: string;
   icon: React.ReactNode;
+  image: string;
   features: string[];
   badge?: string;
   popular?: boolean;
@@ -17,6 +18,7 @@ const packageOptions: PackageOption[] = [
     name: "Базовый",
     price: "от 15 000 ₽",
     icon: <Star className="w-6 h-6" />,
+    image: "https://cdn.poehali.dev/projects/ff79c57e-a7d5-4cf5-b52d-47507fa2815b/bucket/9b20f133-4dae-4dfb-863f-aa09940e5cef.jpg",
     features: [
       "Рама начального уровня",
       "Надёжные колёса 110 мм",
@@ -31,6 +33,7 @@ const packageOptions: PackageOption[] = [
     name: "Про",
     price: "от 28 000 ₽",
     icon: <Zap className="w-6 h-6" />,
+    image: "https://cdn.poehali.dev/projects/ff79c57e-a7d5-4cf5-b52d-47507fa2815b/bucket/de2791fa-b4e1-45d6-8cac-5be2b7efac37.jpg",
     features: [
       "Облегчённая рама Pro",
       "Колёса 120 мм с улучшенным ядром",
@@ -45,6 +48,7 @@ const packageOptions: PackageOption[] = [
     name: "Легенда",
     price: "от 55 000 ₽",
     icon: <Crown className="w-6 h-6" />,
+    image: "https://cdn.poehali.dev/projects/ff79c57e-a7d5-4cf5-b52d-47507fa2815b/bucket/126b0c91-a874-4372-942e-e950a8676332.png",
     features: [
       "Топовая рама signature-серии",
       "Колёса 125 мм premium-класса",
@@ -123,7 +127,15 @@ const LicenseSection = () => {
                   </div>
                 )}
 
-                <CardContent className="relative p-6 rounded-lg h-full flex flex-col">
+                <CardContent className="relative p-0 rounded-lg h-full flex flex-col">
+                  <div className="relative w-full h-48 bg-zinc-950 rounded-t-lg overflow-hidden">
+                    <img
+                      src={option.image}
+                      alt={option.name}
+                      className="w-full h-full object-contain p-4 transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col flex-grow">
                   <div className="text-center mb-6">
                     <div className="inline-flex p-3 rounded-full bg-zinc-900 border border-white/10 mb-4">
                       {option.icon}
@@ -157,6 +169,7 @@ const LicenseSection = () => {
                   >
                     Заказать
                   </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
