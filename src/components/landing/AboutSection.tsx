@@ -63,9 +63,9 @@ const AboutSection = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О ScootCraft</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О ПЕГА</h2>
             <p className="text-lg mb-6 text-zinc-300">
-              ScootCraft — мастерская кастомных трюковых самокатов. Мы не продаём готовые самокаты с полки —
+              ПЕГА — мастерская кастомных трюковых самокатов. Мы не продаём готовые самокаты с полки —
               каждый экземпляр собирается вручную под конкретного райдера: его стиль, рост и уровень катания.
             </p>
             <p className="text-lg mb-8 text-zinc-300">
