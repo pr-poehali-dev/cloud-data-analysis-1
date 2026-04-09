@@ -79,7 +79,7 @@ const Header = () => {
           className="hidden md:block border-white/20 text-white hover:bg-white/10"
           asChild
         >
-          <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}); }}>
+          <a href="https://t.me/sin_mami7" target="_blank" rel="noopener noreferrer">
             Заказать самокат
           </a>
         </Button>

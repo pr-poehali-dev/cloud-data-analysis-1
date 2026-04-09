@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Send, CheckCircle } from "lucide-react";
 
+const SEND_EMAIL_URL = "https://functions.poehali.dev/bd0bf00f-a3cf-4da0-bf4e-13ed3708d767";
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -12,6 +14,7 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
@@ -35,21 +38,33 @@ const ContactSection = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Симуляция отправки
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Форма отправлена:", formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    // Сброс формы через 3 секунды
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 3000);
+    setError("");
+
+    try {
+      const res = await fetch(SEND_EMAIL_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Ошибка отправки");
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: "", email: "", message: "" });
+      }, 4000);
+    } catch {
+      setError("Не удалось отправить. Попробуйте ещё раз.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,7 +79,10 @@ const ContactSection = () => {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
         }`}
       >
-        <h2 className="text-5xl font-bold mb-10 text-center text-zinc-200">Заказать самокат</h2>
+        <h2 className="text-5xl font-bold mb-4 text-center text-zinc-200">Заказать самокат</h2>
+        <p className="text-center text-zinc-400 mb-10">
+          Оставь заявку — мы свяжемся с тобой и подберём идеальную сборку
+        </p>
         <div
           className={`max-w-md mx-auto bg-black/50 backdrop-blur-lg rounded-lg p-8 shadow-2xl border border-white/10 transition-all duration-500 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
@@ -103,6 +121,9 @@ const ContactSection = () => {
                 className="bg-white/5 border-zinc-700 text-zinc-200 placeholder-zinc-500 min-h-[120px]"
               />
             </div>
+            {error && (
+              <p className="text-red-400 text-sm mb-4 text-center">{error}</p>
+            )}
             <Button
               type="submit"
               className="w-full bg-white text-black hover:bg-zinc-200 transition-colors relative overflow-hidden group"
@@ -117,12 +138,12 @@ const ContactSection = () => {
                 ) : isSubmitted ? (
                   <>
                     <CheckCircle className="mr-2" size={18} />
-                    Отправлено!
+                    Заявка отправлена!
                   </>
                 ) : (
                   <>
                     <Send className="mr-2" size={18} />
-                    Отправить сообщение
+                    Отправить заявку
                   </>
                 )}
               </span>

@@ -165,9 +165,11 @@ const LicenseSection = () => {
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    asChild
                   >
-                    Заказать
+                    <a href="https://t.me/sin_mami7" target="_blank" rel="noopener noreferrer">
+                      Заказать в Telegram
+                    </a>
                   </Button>
                   </div>
                 </CardContent>
