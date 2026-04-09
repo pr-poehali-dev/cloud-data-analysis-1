@@ -52,15 +52,14 @@ const AboutSection = () => {
           }`}
           style={{ transform: `translateY(${(1 - scrollProgress) * 50}px)` }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/0 rounded-3xl transform -rotate-6"></div>
-            <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-800 flex items-center justify-center border border-white/20">
-                  <Icon name="Bike" size={64} className="text-white" />
-                </div>
-                <p className="text-zinc-400 text-lg">Кастомная сборка под ключ</p>
-              </div>
+            <div className="relative z-10 w-full aspect-square flex items-center justify-center p-8">
+              <img
+                src="https://cdn.poehali.dev/projects/ff79c57e-a7d5-4cf5-b52d-47507fa2815b/bucket/7a311bd5-adf1-42f8-a7f9-4b611412bccf.jpeg"
+                alt="ПЕГА логотип"
+                className="w-full h-full object-contain rounded-3xl drop-shadow-2xl"
+              />
             </div>
           </div>
           <div>
