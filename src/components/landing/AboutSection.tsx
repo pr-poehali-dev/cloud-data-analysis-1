@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
-import { Headphones, Music, Mic2, Award } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const achievements = [
-  { icon: <Headphones className="w-6 h-6" />, label: "Лет опыта", value: "10+" },
-  { icon: <Music className="w-6 h-6" />, label: "Созданных треков", value: "500+" },
-  { icon: <Mic2 className="w-6 h-6" />, label: "Коллабораций с артистами", value: "100+" },
-  { icon: <Award className="w-6 h-6" />, label: "Наград", value: "15+" },
+  { icon: "Wrench", label: "Лет опыта в сборке", value: "5+" },
+  { icon: "ShieldCheck", label: "Гарантия на каждый самокат", value: "1 год" },
+  { icon: "Users", label: "Довольных клиентов", value: "250+" },
+  { icon: "Star", label: "Только оригинальные детали", value: "100%" },
 ];
 
 const AboutSection = () => {
@@ -56,24 +56,23 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/0 rounded-3xl transform -rotate-6"></div>
             <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                  <Music className="w-16 h-16 text-white" />
+                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-800 flex items-center justify-center border border-white/20">
+                  <Icon name="Bike" size={64} className="text-white" />
                 </div>
-                <p className="text-zinc-400 text-lg">Фото продюсера</p>
+                <p className="text-zinc-400 text-lg">Кастомная сборка под ключ</p>
               </div>
             </div>
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О SoundForge</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О ScootCraft</h2>
             <p className="text-lg mb-6 text-zinc-300">
-              SoundForge — это не просто битмейкер, это звуковой архитектор, создающий саундскейпы
-              будущего. С десятилетним опытом и чутким слухом на инновации, SoundForge раздвигает
-              границы возможного в музыкальном продакшене.
+              ScootCraft — мастерская кастомных трюковых самокатов. Мы не продаём готовые самокаты с полки —
+              каждый экземпляр собирается вручную под конкретного райдера: его стиль, рост и уровень катания.
             </p>
             <p className="text-lg mb-8 text-zinc-300">
-              От хитов в чартах до андеграундных гимнов — универсальный стиль и внимание к деталям
-              гарантируют, что каждый бит — это не просто трек, а путешествие, ждущее правильного
-              артиста.
+              Используем только оригинальные новые детали от проверенных брендов. Каждый самокат проходит
+              полную проверку перед передачей клиенту. Годовая гарантия и бесплатное техобслуживание —
+              входят в стоимость любой комплектации.
             </p>
             <div className="grid grid-cols-2 gap-6">
               {achievements.map((achievement, index) => (
@@ -85,7 +84,9 @@ const AboutSection = () => {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-center mb-2">
-                    <div className="mr-2 text-white">{achievement.icon}</div>
+                    <div className="mr-2 text-white">
+                      <Icon name={achievement.icon} size={24} />
+                    </div>
                     <div className="text-2xl font-bold text-white">{achievement.value}</div>
                   </div>
                   <div className="text-sm text-zinc-400">{achievement.label}</div>

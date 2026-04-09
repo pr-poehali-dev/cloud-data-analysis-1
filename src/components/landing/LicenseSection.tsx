@@ -1,71 +1,57 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, X, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface LicenseOption {
+interface PackageOption {
   name: string;
   price: string;
   icon: React.ReactNode;
   features: string[];
-  notIncluded?: string[];
-  bulkDeal?: string;
+  badge?: string;
   popular?: boolean;
 }
 
-const licenseOptions: LicenseOption[] = [
+const packageOptions: PackageOption[] = [
   {
-    name: "Стандартная лицензия",
-    price: "299 руб",
+    name: "Базовый",
+    price: "от 15 000 ₽",
     icon: <Star className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 5 000 копий",
-      "75 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (2 станции)",
+      "Рама начального уровня",
+      "Надёжные колёса 110 мм",
+      "Базовые пеги и дека",
+      "Оригинальные комплектующие",
+      "Годовая гарантия",
+      "Бесплатное ТО",
     ],
-    bulkDeal: "КУПИ 1 ТРЕК — ПОЛУЧИ 1 В ПОДАРОК!",
+    badge: "ОТЛИЧНЫЙ СТАРТ!",
   },
   {
-    name: "Продвинутая лицензия",
-    price: "499 руб",
+    name: "Про",
+    price: "от 28 000 ₽",
     icon: <Zap className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 10 000 копий",
-      "150 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Облегчённая рама Pro",
+      "Колёса 120 мм с улучшенным ядром",
+      "Профессиональные пеги и дека",
+      "Вилка с улучшенной геометрией",
+      "Оригинальные комплектующие",
+      "Годовая гарантия + бесплатное ТО",
     ],
     popular: true,
   },
   {
-    name: "Премиум лицензия",
-    price: "799 руб",
+    name: "Легенда",
+    price: "от 55 000 ₽",
     icon: <Crown className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 20 000 копий",
-      "500 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Только некоммерческие выступления",
-    ],
-    notIncluded: ["Без прав на радиотрансляцию"],
-  },
-  {
-    name: "Коммерческая лицензия",
-    price: "899 руб",
-    icon: <Globe className="w-6 h-6" />,
-    features: [
-      "Использование для записи музыки",
-      "Неограниченное распространение",
-      "Неограниченные онлайн-прослушивания",
-      "Неограниченное количество клипов",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Топовая рама signature-серии",
+      "Колёса 125 мм premium-класса",
+      "Карбоновые / титановые элементы",
+      "Индивидуальная покраска рамы",
+      "Полная кастомизация под райдера",
+      "Годовая гарантия + бесплатное ТО",
     ],
   },
 ];
@@ -102,15 +88,15 @@ const LicenseSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою лицензию</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Комплектации</h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Подбери идеальную лицензию под свои потребности и начни создавать потрясающую музыку уже
-            сегодня
+            Выбери уровень — мы соберём самокат из оригинальных деталей, проверим каждый узел и передадим
+            с гарантией
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {licenseOptions.map((option, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {packageOptions.map((option, index) => (
             <div
               key={option.name}
               className={`transition-all duration-500 ${
@@ -154,30 +140,22 @@ const LicenseSection = () => {
                           <span className="text-sm text-zinc-300">{feature}</span>
                         </li>
                       ))}
-                      {option.notIncluded?.map((feature, i) => (
-                        <li key={i} className="flex items-start text-zinc-500">
-                          <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
                     </ul>
                   </div>
 
-                  {option.bulkDeal && (
+                  {option.badge && (
                     <div className="mb-4">
                       <p className="text-sm font-semibold text-white bg-white/5 py-2 px-3 rounded-lg border border-white/10 animate-pulse">
-                        {option.bulkDeal}
+                        {option.badge}
                       </p>
                     </div>
                   )}
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    asChild
+                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      Выбрать
-                    </a>
+                    Заказать
                   </Button>
                 </CardContent>
               </Card>
